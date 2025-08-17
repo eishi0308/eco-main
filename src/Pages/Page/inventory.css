@@ -1,0 +1,887 @@
+/* Updated App.css */
+
+/* body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  background-image: url('images/inventoryback.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 25%; /* Adjust background position to start from 1/4 of the page */
+/*} */
+
+/* Define the blinking animation */
+@keyframes blink-animation {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Apply the blinking animation to elements with the .blink class */
+.blink {
+  animation: blink-animation 1s linear infinite;
+}
+
+
+/* .App {
+  max-width: 1200px;
+
+  margin-top: 40px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+/*} */
+
+
+.toolbar {
+  /* background-color: #f8f8f8; */
+  padding: 7px 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.toolbardiv {
+  padding-right: 0;
+  padding-left: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.inventory-action-button {
+  background: none !important;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 13px; /* Adjust font size as needed */
+  transition: color 0.2s ease;
+}
+
+
+.action-button:hover {
+  color: #333; /* Darken the text color on hover */
+}
+
+.save-button {
+  color: green; /* Green color for save button */
+  margin-right: 10px;
+}
+
+.cancel-button {
+  color: red; /* Red color for cancel button */
+}
+
+.scan-button {
+  color: 3b74a7; /* Blue color for scan button */
+    margin-right: 10px;
+}
+
+.edit-button {
+  color: #333; /* Default color for edit button */
+    margin-right: 10px;
+}
+
+.delete-button {
+  color: cc0000; /* Red color for delete button */
+}
+
+.action-button.disabled {
+  color: #ccc; /* Gray color for disabled buttons */
+  cursor: not-allowed; /* Change cursor to not-allowed for disabled buttons */
+}
+
+.toolbar button {
+  background-color: transparent; /* Remove black highlight */
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.toolbar button:hover {
+  background-color: #555;
+}
+
+header {
+  font-size: 22px;
+  color: #333;
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  font-weight: bold; /* Add this line to make the text bold */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Corrected spelling mistake */
+  margin-top: -60px;
+  margin-bottom: 40px;
+
+}
+
+th{
+  text-align: center;
+  padding: 10px;  /* Adjusted padding */
+  border-bottom: 1px solid #ddd;
+  color: black;
+}
+
+td{
+  text-align: center;
+  padding: 10px; /* Adjusted padding */
+  border-bottom: 1px solid #ddd;
+  color: black;
+}
+
+th {
+  background-color: #dff0ff;  /* Solid gray green color */
+}
+
+tr:hover {
+  background-color: #dff0ff;
+}
+
+.status-not-expired {
+  color: green;
+}
+
+.status-expired {
+  color: red;
+}
+
+inv-header-container{
+  display: flex;
+
+}
+
+.actions {
+  flex-grow: 3; /* Takes up 30% of the available space */
+    display: flex;
+  justify-content: space-between; /* Evenly distribute space between items */
+
+  flex-direction: column;
+  text-align: center;
+  margin-top: 20px; /* Add margin to push the buttons down */
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 30px; /* Increased padding for top and sides */
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  z-index: 1001;
+}
+
+.popup h2 {
+  margin-top: 0;
+}
+
+.sort-button {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+    font-weight: bold;
+
+  cursor: pointer;
+  padding:10px;
+  color: #333;
+}
+
+.sort-button:focus {
+  outline: none;
+}
+
+.sort-button:hover {
+  color: #007bff; /* Change color on hover if desired */
+}
+
+
+.popup .form-group {
+  margin-bottom: 20px; /* Increased space between form groups */
+}
+
+.popup .form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.popup input[type="text"],
+.popup input[type="number"],
+.popup input[type="file"] {
+  width: 100%;
+  color: #333;
+  padding: 10px; /* Increased padding for input fields */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.popup input[type="submit"],
+.popup button {
+  padding: 12px 24px; /* Increased padding for buttons */
+  margin-right: 10px; /* Added space between Save and Cancel buttons */
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup input[type="submit"]:hover,
+.popup button:hover {
+  background-color: #45a049;
+}
+
+.popup button:last-of-type {
+  margin-right: 0;
+}
+
+.popup label {
+color: #333;
+  display: block;
+  margin-bottom: 10px; /* Add spacing between lines */
+  font-weight: bold;
+}
+
+.popup input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px; /* Add spacing between input boxes */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.popup .scan-options {
+  margin-top: 20px; /* Add spacing between scan options and buttons */
+}
+
+.popup button {
+  margin-top: 10px; /* Add spacing between buttons */
+}
+
+/* Button styling */
+.actions {
+margin-top:-35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.add-button,
+.scan-buttons button {
+
+  margin: 8px;
+  padding: 0; /* Reset padding */
+  color: #fff;
+  background-color: #3498db; /* Blue color */
+  border: 2px solid #2980b9; /* Darker shade of blue */
+  border-radius: 6px; /* Slightly rounded borders */
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none; /* Remove the default focus outline */
+  width: 180px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  line-height: 50px; /* Center text vertically */
+}
+
+
+.add-button:hover,
+.scan-buttons button:hover {
+  background-color: #2980b9; /* Darker shade when hovered */
+}
+
+.add-button:active,
+.scan-buttons button:active {
+  background-color: #2c3e50; /* Darker shade when pressed */
+  border-color: #34495e; /* Darker shade of border when pressed */
+}
+
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  75% {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.green-button {
+  margin: 8px;
+  padding: 0; /* Reset padding */
+  color: #fff;
+  background-color: #006400; /* Blue color */
+  border: 2px solid #2980b9; /* Darker shade of blue */
+  border-radius: 6px; /* Slightly rounded borders */
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none; /* Remove the default focus outline */
+  width: 180px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  line-height: 50px; /* Center text vertically */
+  animation: blink 2s ease; /* Blink animation */
+}
+
+
+.recipeheader {
+  color: #333;
+  font-size: 20px;
+}
+
+@keyframes blink-animation {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.blink {
+  animation: blink-animation 1s linear infinite;
+}
+
+
+
+
+.generate-button {
+  margin: 8px;
+  padding: 0; /* Reset padding */
+  color: #fff;
+  background-color: #1f496f; /* Blue color */
+  border: 2px solid #2980b9; /* Darker shade of blue */
+  border-radius: 6px; /* Slightly rounded borders */
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none; /* Remove the default focus outline */
+  width: 180px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  line-height: 50px; /* Center text vertically */}
+
+.generate-button:hover {
+  background-color: #8dd687; /* Lighter shade of green on hover */
+}
+
+.generate-button button {
+  border-radius: 30px; /* Apply the same border radius to the inner button */
+  color: #333;
+  background-color: white; /* Light green color */
+  padding: 6px 10px; /* Increased padding for better visual balance */
+
+
+}
+
+
+.congrats-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-top: -270px;
+  text-align: center;
+  z-index: 1000; /* Ensure it appears above other content */
+  animation: showPopup 2s ease forwards; /* Animation to show the popup */
+}
+
+@keyframes showPopup {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.congrats-popup p {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Add a close button */
+.congrats-popup button {
+  border: none;
+  background-color: #ff6347; /* Tomato color */
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.congrats-popup button:hover {
+  background-color: #d64937; /* Darker shade of tomato */
+}
+
+
+.recipecontainer {
+  display: flex;
+}
+
+.recipebox {
+  flex: 1;
+  margin: 0 10px; /* Adjust margin as needed */
+  height: 100px; /* Set desired height */
+  background-color: #CCC; /* Set background color */
+}
+
+/* Add this CSS to style the date picker calendar */
+
+/* Styling the date picker input field */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+/* Styling the date picker calendar */
+.react-datepicker {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  min-height: 400px; /* Increase the min-height to extend the white background */
+  font-size: 1em;
+}
+
+/* Styling the header of the date picker calendar */
+.react-datepicker__header {
+  background-color: #f0f0f0;
+  border-bottom: none;
+}
+
+/* Styling the navigation buttons (previous and next month) */
+.react-datepicker__navigation--previous,
+.react-datepicker__navigation--next {
+  border: none;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.react-datepicker__navigation--previous {
+  left: 20px;
+}
+
+.react-datepicker__navigation--next {
+  right: 20px;
+}
+
+/* Styling the month and year selector */
+.react-datepicker__current-month {
+  font-weight: bold;
+  font-size: 1em;
+  padding: 10px;
+}
+
+/* Styling the weekdays */
+.react-datepicker__day-name {
+  color: #666;
+  padding: 5px;
+  width: 2.5em;
+  line-height: 2.5em;
+}
+
+/* Styling the days */
+.react-datepicker__day {
+  color: #333;
+  width: 2.5em;
+  line-height: 2.5em;
+  margin: 0.166em;
+}
+
+/* Styling the selected day */
+.react-datepicker__day--selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Styling the hovered day */
+.react-datepicker__day--keyboard-selected:hover,
+.react-datepicker__day--selected:hover {
+  background-color: #0056b3;
+}
+
+/* Styling the disabled days */
+.react-datepicker__day--disabled {
+  color: #ccc;
+}
+
+/* Styling the today's date */
+.react-datepicker__day--today {
+  font-weight: bold;
+}
+
+.modal-overlay {
+  position: fixed; /* or absolute */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9); /* Dark overlay */
+  z-index: 999; /* Below the modal, above the content */
+}
+
+.homepage {
+    font-family: Calibri, sans-serif;
+    color: black !important;
+    text-align: left;
+}
+
+/* Style for team dropdown */
+.navbar .dropdown-menu.team-dropdown {
+  width: 500px; /* Adjust the width as needed */
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #F0F8F0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-icons {
+  position: relative;
+}
+
+.action-icons svg {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  margin-left: 12px;
+  color: #36454F;
+  cursor: pointer;
+}
+
+.edit-hover {
+  display: none;
+  position: absolute;
+  top: -30px;
+  left: 40%;
+  transform: translateX(-50%);
+  color: #36454F;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 999;
+}
+
+.delete-hover {
+  display: none;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #36454F;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 999;
+}
+
+.scan-hover {
+  display: none;
+  position: absolute;
+  top: -30px;
+  left: 70%;
+  transform: translateX(-50%);
+  color: #36454F;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 999;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+
+.edit-icon:hover + .edit-hover {
+  display: block;
+}
+
+.delete-icon:hover + .delete-hover {
+  display: block;
+}
+
+.scan-icon:hover + .scan-hover {
+  display: block;
+}
+
+
+
+
+
+/* Status Indicator */
+.status-popup {
+  width: auto;
+  max-width: 70%;
+  margin: 20px auto;
+  padding: 5px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.status-popup .content img {
+  max-width: 100%;
+  max-height: 400px;
+  height: auto;
+  margin: auto;
+  display: block;
+}
+
+
+
+.status-popup .center-button {
+  margin-top: 20px;
+}
+
+
+.status-popup img {
+  width: 100%;
+  height: auto;
+}
+
+
+.status-popup .center-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+
+}
+
+.info-icon {
+  cursor: pointer;
+}
+.empty-inventory-message {
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #006400; /* Bottle Green */
+  padding: 10px;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.empty-inventory-message h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+
+}
+
+.table-and-buttons {
+  display: flex;
+  justify-content: space-between; /* To evenly distribute space between the two elements */
+}
+
+.inventory-table-container {
+  flex-grow: 7; /* Takes up 70% of the available space */
+  margin-top: 30px;
+  margin-left: 30px;
+  background-color: f9f9f7;
+}
+
+.inv-header-container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  margin-top: 40px;
+  margin-bottom: 20px; /* Adjusted margin for better spacing */
+}
+
+.inv-header-text {
+  flex: 1; /* Allow header text to grow to take available space */
+  font-size: 30px; /* Adjusted font size */
+  color: #23527c;
+  font-family: 'Pacifico', cursive;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  border-bottom: 2px solid #23527c;
+  margin: 0; /* Remove default margin */
+  text-align: left;
+  margin-left:40px;
+}
+.personalized-button {
+  margin-left: 20px; /* Adjusted margin for spacing */
+  margin-right: 40px;
+}
+.personalized-button button {
+  font-size: 16px; /* Adjusted font size */
+  padding: 8px 16px; /* Adjusted padding */
+  background-color: transparent; /* Make background transparent */
+  color: #23527c; /* Text color */
+  border: 2px solid #23527c; /* Border color */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for color change */
+}
+
+.personalized-button button:hover {
+  background-color: #1a436d; /* Darker shade on hover */
+  color: white; /* Text color on hover */
+}
+
+.pagination
+{margin-left:500px;
+}
+
+/* Styling for the delete confirmation popup */
+.delete-confirmation-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 999; /* Ensure it appears above other elements */
+  color: #333;
+}
+
+.delete-confirmation-popup p {
+  margin-bottom: 10px;
+}
+
+.delete-confirmation-popup button {
+  margin-right: 10px;
+}
+
+
+.empty-inventory-message p {
+
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.empty-cart-image {
+  background-image: url('../images/cart.jpeg');
+  width: 200px;
+  height: 200px;
+  margin: 2px auto;
+  background-repeat: no-repeat;
+}
+
+
+
+
+/*
+oard Styles */
+.dashboard-container {
+  background: #f4f4f4;
+  display: flex;
+  width: 90%;
+  margin: 100px;
+  padding: 10px;
+  gap: 10px; /* Space between sections */
+  height: 80vh; /* Adjusts to 80% of the viewport height */
+}
+
+.dashboard-left-side {
+  display: flex;
+  flex-direction: column;
+  flex: 2; /* Takes 2 parts of the available space */
+  gap: 10px;
+  background: #ffffff;
+
+}
+
+.dashboard-header {
+
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.dashboard-header h2{
+ align-text: center;
+ padding: 20px;
+ margin: 20px;
+
+}
+
+.dashboard-image {
+
+    background-image: url('../images/flowerpot.jpg');
+    background-size: cover; /* Cover the entire container */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    width: 150px;
+    height: 100px;
+
+}
+
+.dashboard-chart-container {
+  flex: 2;
+  padding: 20px;
+  background: #ffffff;
+}
+
+.justline{
+    background: #f4f4f4;
+    height: 10px;
+
+}
+.dashboard-table-container {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.dashboard-table th, .dashboard-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.dashboard-table th {
+  background-color: #4CAF50;
+  color: white;
+}
