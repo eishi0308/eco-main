@@ -2,7 +2,7 @@
 
 .recipe-page {
   margin: 0;
-  padding: 0;
+  padding: 1em;
   font-family: 'Arial', sans-serif;
   background-color: ##eadec9;
   background-size: cover;
@@ -10,10 +10,13 @@
   background-position: center;
 }
 
+
+/* here only reflects inventory page */
 .App {
   text-align: center;
   font-family: 'Arial', sans-serif;
-  padding: 1em;
+  padding: 5em; 
+  /* margin-top: 150px;  */
   background-color: #f7f7f7;
 }
 

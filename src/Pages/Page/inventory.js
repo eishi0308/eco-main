@@ -680,217 +680,297 @@ if (extractedText2 !== '' || msg2 !== '') {
 
 
   return (
-    <div>
-      {isPopupActive && <div className="modal-overlay" onClick={closeAllPopups}></div>}
-      <div className="main-content"></div>
+  <div>
+    {isPopupActive && (
+      <div className="modal-overlay" onClick={closeAllPopups}></div>
+    )}
 
+    {/* Wrap EVERYTHING in main-content so padding applies */}
+    <div className="main-content">
       {/* inventory main content */}
       <div className="App">
-
-
-  <div className="inv-header-container">
-  <p className="inv-header-text">Begin Your Flavorful Journey Here!
-</p>
-<div className="personalized-button">  <button onClick={scrollToDashboard}>My spending</button>
-
-</div></div>
-        <header></header>
-        <div className="table-and-buttons">
-        <div className="inventory-table-container">
-
-
-        <InventoryList
-  inventory={currentInventory}
-  onEdit={handleEditItem}
-  onDelete={handleDeleteItem}
-  togglePopup={togglePopup}
-  onEditingItemChange={handleEditingItemChange}
-/>
+        <div className="inv-header-container">
+          <p className="inv-header-text">Begin Your Flavorful Journey Here!</p>
+          <div className="personalized-button">
+            <button onClick={scrollToDashboard}>My spending</button>
+          </div>
         </div>
 
+        <header></header>
 
-        <div className="actions">
-                    <button
-  onClick={() => togglePopup('receipt')}
-  className={`add-button ${inventory.length === 0 ? 'green-button' : ''}`}
-  disabled={editingItem !== null}
->
-  Scan Receipt
-</button>
+        <div className="table-and-buttons">
+          <div className="inventory-table-container">
+            <InventoryList
+              inventory={currentInventory}
+              onEdit={handleEditItem}
+              onDelete={handleDeleteItem}
+              togglePopup={togglePopup}
+              onEditingItemChange={handleEditingItemChange}
+            />
+          </div>
 
-        <button
-            className="add-button"
-            onClick={() => togglePopup('add')}
-            disabled={editingItem !== null}>
-            Add Additional Items
-          </button>
+          <div className="actions">
+            <button
+              onClick={() => togglePopup('receipt')}
+              className={`add-button ${
+                inventory.length === 0 ? 'green-button' : ''
+              }`}
+              disabled={editingItem !== null}
+            >
+              Scan Receipt
+            </button>
 
-               <button onClick={() => togglePopup('produce')}  disabled={editingItem !== null}
-                           className="add-button"
-  >Scan Fresh Produce</button>
+            <button
+              className="add-button"
+              onClick={() => togglePopup('add')}
+              disabled={editingItem !== null}
+            >
+              Add Additional Items
+            </button>
 
-          {showAddPopup && (
-            <div
-              className="modal-overlay"
-              onClick={() => setShowAddPopup(false)}
-            ></div>
-          )}
-          {inventory.length > 0 && (
+            <button
+              onClick={() => togglePopup('produce')}
+              disabled={editingItem !== null}
+              className="add-button"
+            >
+              Scan Fresh Produce
+            </button>
 
-<Link to="/recipes">
-  <button className={`generate-button ${hasOneItemInInventory && !hasBlinked ? 'blink' : ''}`}>Generate recipes!</button>
-</Link>
+            {/* Add Popup */}
+            {showAddPopup && (
+              <>
+                <div
+                  className="modal-overlay"
+                  onClick={() => setShowAddPopup(false)}
+                ></div>
 
-)}
+                <div className="popup large-popup">
+                  <h2>Add New Item</h2>
 
+                  <div className="form-group">
+                    <label>Name:</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={newItem.name}
+                      onChange={handleInputChange}
+                    />
+                  </div>
 
-          {/* Add Popup */}
-          {showAddPopup && (
-            <div className="popup large-popup">
-              <h2>Add New Item</h2>
-              <div className="form-group">
-                <label>Name:</label>
-                <input type="text" name="name" value={newItem.name} onChange={handleInputChange} />
-              </div>
-              <div className="form-group">
-                <label>Quantity:</label>
-                <input type="text" name="amount" value={newItem.amount} onChange={handleInputChange} />
-              </div>
-              <div className="form-group">
-                <div className="form-group">
-                  <label>Price:</label>
-                  <input type="text" name="spent" value={newItem.spent} onChange={handleInputChange} />
+                  <div className="form-group">
+                    <label>Quantity:</label>
+                    <input
+                      type="text"
+                      name="amount"
+                      value={newItem.amount}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Price:</label>
+                    <input
+                      type="text"
+                      name="spent"
+                      value={newItem.spent}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Expiry Date:</label>
+                    <DatePicker
+                      selected={expiryPlaceholder}
+                      onChange={(date) => {
+                        const formattedDate = date.toLocaleDateString(
+                          'en-GB',
+                          {
+                            day: '2-digit',
+                            month: 'short',
+                            year: 'numeric',
+                          }
+                        );
+                        setExpiryPlaceholder(date);
+                        setNewItem((prevItem) => ({
+                          ...prevItem,
+                          expiryDate: formattedDate,
+                        }));
+                      }}
+                      dateFormat="dd MMM yyyy"
+                      className="date-picker add-date-picker"
+                    />
+                  </div>
+
+                  <div className="form-actions">
+                    <button onClick={handleAddItem}>Save</button>
+                    <button onClick={() => togglePopup('add')}>Cancel</button>
+                  </div>
                 </div>
-              </div>
+              </>
+            )}
 
-              <div className="form-group">
-                <label>Expiry Date:</label>
-                <DatePicker
-                  selected={expiryPlaceholder}
-                  onChange={(date) => {
-                    // Format the selected date
-                    const formattedDate = date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-                    // Set the formatted date to the expiryPlaceholder
-                    setExpiryPlaceholder(date);
-                    // Update the expiry date in newItem
-                    setNewItem(prevItem => ({ ...prevItem, expiryDate: formattedDate }));
+            {/* Scan Receipt Popup */}
+            {showScanReceiptPopup && (
+              <div className="popup">
+                <h2>Scan Receipt</h2>
+                {setUploadingImage && (
+                  <div className="loading-overlay">Loading...</div>
+                )}
+                <h3
+                  style={{
+                    textAlign: 'center',
+                    fontFamily: 'Arial, sans-serif',
                   }}
-                  dateFormat="dd MMM yyyy"
-
-                  // Add a specific class name for date picker in adding item mode
-                  className="date-picker add-date-picker"
+                >
+                  Capture a Picture
+                </h3>
+                <Webcam
+                  audio={false}
+                  ref={webcamRef}
+                  screenshotFormat="image/jpeg"
+                  width={320}
+                  height={240}
                 />
-              </div>
-
-              <div className="form-actions">
-                <button onClick={handleAddItem}>Save</button>
-                <button onClick={() => togglePopup('add')}>Cancel</button>
-              </div>
-            </div>
-
-          )}
-
-          {/* Scan Receipt Popup */}
-     {showScanReceiptPopup && (
-  <div className="popup">
-    <h2>Scan Receipt</h2>
-    {setUploadingImage && <div className="loading-overlay">Loading...</div>}
-    <h3 style={{textAlign: 'center', fontFamily: 'Arial, sans-serif'}}>Capture a Picture</h3>
-  <Webcam
-    audio={false}
-    ref={webcamRef}
-    screenshotFormat="image/jpeg"
-    width={320}
-    height={240}
-  />
-  <h3> </h3>
-  <button onClick={capturePhoto} style={{display: 'block', margin: '0 auto'}}>Capture Photo</button>
-  <h3> </h3>
-  {imgSrc && <img src={imgSrc} alt="Uploaded" />}
-  <form id="uploadForm" onSubmit={handleUpload2} encType="multipart/form-data">
-  <input type="submit" value="Upload" />
-  </form>
-  <h3 style={{textAlign: 'center', fontFamily: 'Arial, sans-serif'}}>Or Choose a Picture</h3>
-    <div className="scan-options">
-      <form onSubmit={handleUpload} encType="multipart/form-data">
-        <input type="file" name="file" onChange={handleFileChange} />
-        <input type="submit" value="Upload" />
-      </form>
-      {imgSrc && <img src={imgSrc} alt="Uploaded" />}
-      <img src={samimg1} alt="Sample Image" width="25" height="25" />
-      <a href={samimg1} download>  Download Sample Image</a>
-    </div>
-    <button onClick={() => togglePopup('receipt')}>Cancel</button>
-  </div>
-)}
-
-
-          {/* Scan Package Popup */}
-          {showScanPackagePopup && (
-
-            <div className="popup">
-              <h2>Scan Package</h2>
-              <div className="scan-options">
-                <form onSubmit={handleUpload3} encType="multipart/form-data">
-                  <input type="file" name="file2" onChange={handleFileChange2} />
+                <h3> </h3>
+                <button
+                  onClick={capturePhoto}
+                  style={{ display: 'block', margin: '0 auto' }}
+                >
+                  Capture Photo
+                </button>
+                <h3> </h3>
+                {imgSrc && <img src={imgSrc} alt="Uploaded" />}
+                <form
+                  id="uploadForm"
+                  onSubmit={handleUpload2}
+                  encType="multipart/form-data"
+                >
                   <input type="submit" value="Upload" />
                 </form>
-                {imgSrc2 && <img src={imgSrc2} alt="Uploaded" />}
+                <h3
+                  style={{
+                    textAlign: 'center',
+                    fontFamily: 'Arial, sans-serif',
+                  }}
+                >
+                  Or Choose a Picture
+                </h3>
+                <div className="scan-options">
+                  <form
+                    onSubmit={handleUpload}
+                    encType="multipart/form-data"
+                  >
+                    <input type="file" name="file" onChange={handleFileChange} />
+                    <input type="submit" value="Upload" />
+                  </form>
+                  {imgSrc && <img src={imgSrc} alt="Uploaded" />}
+                  <img src={samimg1} alt="Sample" width="25" height="25" />
+                  <a href={samimg1} download>
+                    {' '}
+                    Download Sample Image
+                  </a>
+                </div>
+                <button onClick={() => togglePopup('receipt')}>Cancel</button>
               </div>
-              <button onClick={() => togglePopup('package')}>Cancel</button>
-            </div>
+            )}
 
-          )}
+            {/* Scan Package Popup */}
+            {showScanPackagePopup && (
+              <div className="popup">
+                <h2>Scan Package</h2>
+                <div className="scan-options">
+                  <form
+                    onSubmit={handleUpload3}
+                    encType="multipart/form-data"
+                  >
+                    <input
+                      type="file"
+                      name="file2"
+                      onChange={handleFileChange2}
+                    />
+                    <input type="submit" value="Upload" />
+                  </form>
+                  {imgSrc2 && <img src={imgSrc2} alt="Uploaded" />}
+                </div>
+                <button onClick={() => togglePopup('package')}>Cancel</button>
+              </div>
+            )}
 
-{showScanProducePopup && (
-  <div className="popup">
-    <h2>Scan Produce</h2>
-    {setUploadingImage && <div className="loading-overlay">Loading...</div>}
-    <div className="scan-options">
-      <form id="uploadForm" onSubmit={handleUpload2} encType="multipart/form-data">
-        <input type="file" name="file1" onChange={handleFileChange1} />
-        <input type="submit" value="Upload" />
-      </form>
-      {imgSrc1 && <img src={imgSrc1} alt="Uploaded" />}
-      <img src={samimg2} alt="Sample Image" width="25" height="25" />
-      <a href={samimg2} download>  Download Sample Image</a>
-    </div>
-    <button onClick={() => togglePopup('produce')}>Cancel</button>
-  </div>
-)}
-
+            {/* Scan Produce Popup */}
+            {showScanProducePopup && (
+              <div className="popup">
+                <h2>Scan Produce</h2>
+                {setUploadingImage && (
+                  <div className="loading-overlay">Loading...</div>
+                )}
+                <div className="scan-options">
+                  <form
+                    id="uploadFormProduce"
+                    onSubmit={handleUpload2}
+                    encType="multipart/form-data"
+                  >
+                    <input
+                      type="file"
+                      name="file1"
+                      onChange={handleFileChange1}
+                    />
+                    <input type="submit" value="Upload" />
+                  </form>
+                  {imgSrc1 && <img src={imgSrc1} alt="Uploaded" />}
+                  <img src={samimg2} alt="Sample" width="25" height="25" />
+                  <a href={samimg2} download>
+                    {' '}
+                    Download Sample Image
+                  </a>
+                </div>
+                <button onClick={() => togglePopup('produce')}>Cancel</button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* Pagination under the table */}
+      <div className="pagination">
+        <button
+          onClick={() =>
+            setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
+          }
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>{`Page ${currentPage} of ${totalPages}`}</span>
+        <button
+          onClick={() =>
+            setCurrentPage((prevPage) =>
+              Math.min(prevPage + 1, totalPages)
+            )
+          }
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
       </div>
-<div className="pagination">
-  <button
-    onClick={() => setCurrentPage(prevPage => Math.max(prevPage - 1, 1))}
-    disabled={currentPage === 1}
-  >
-    Previous
-  </button>
-  <span>{`Page ${currentPage} of ${totalPages}`}</span>
-  <button
-    onClick={() => setCurrentPage(prevPage => Math.min(prevPage + 1, totalPages))}
-    disabled={currentPage === totalPages}
-  >
-    Next
-  </button>
 
-</div>
-
- {showCongratsPopup && (
+      {/* Congrats popup */}
+      {showCongratsPopup && (
         <div className="congrats-popup">
-          <p>Congratulations on starting your inventory! Check out some recipes now.</p>
+          <p>
+            Congratulations on starting your inventory! Check out some recipes
+            now.
+          </p>
         </div>
       )}
 
-<div id="dashboard-section">
-<Dashboard top5WastedFoods={top5WastedFoods} />
-    </div></div>
+      {/* Dashboard section (My spending) */}
+      <div id="dashboard-section">
+        <Dashboard top5WastedFoods={top5WastedFoods} />
+      </div>
+    </div>
+  </div>
+);
 
-
-  );
 }
 
 export default Maininventory;
