@@ -1,6 +1,6 @@
 /* App.css */
 
-.recipe-page {
+/* .recipe-page {
   margin: 0;
   padding: 1em;
   font-family: 'Arial', sans-serif;
@@ -8,7 +8,7 @@
   background-size: cover;
   background-repeat: repeat;
   background-position: center;
-}
+} */
 
 
 /* here only reflects inventory page */
@@ -305,7 +305,7 @@ margin-top: 3px;
   margin-top: -10px;
   margin-bottom: -60px;
   padding: 10px 20px;
-  background: linear-gradient(to right, #5D4E157, #7CB342);
+  background: linear-gradient(to right, #eab509, #f39509);
   color: #fff;
   border: none;
   border-radius: 25px;
